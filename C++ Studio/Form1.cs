@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -10,6 +10,9 @@ namespace C___Studio
         public Form1()
         {
             InitializeComponent();
+            menuStrip1.Width = Width;
+            textBox1.Width = Width - 15;
+            textBox1.Height = Height - 61;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -78,7 +81,7 @@ namespace C___Studio
         {
             menuStrip1.Width = Width;
             textBox1.Width = Width - 15;
-            textBox1.Height = Height - 62;
+            textBox1.Height = Height - 61;
         }
 
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
