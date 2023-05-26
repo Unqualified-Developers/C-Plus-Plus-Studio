@@ -1,5 +1,7 @@
 using System;
+using System.Drawing;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace C___Studio
@@ -152,6 +154,23 @@ namespace C___Studio
             Cursor = Cursors.WaitCursor;
             textBox1.SelectAll();
             Cursor = Cursors.Default;
+        }
+
+        private void TextChange(object sender, EventArgs e)
+        {
+            string syntax = @"(\b(abstract|as|base|bool|break|byte|case|catch|char|checked|class|const|continue|decimal|default|delegate|do|double|else|enum|event|explicit|extern|false|finally|fixed|float|for|foreach|goto|if|implicit|in|int|interface|internal|is|lock|long|namespace|new|null|object|operator|out|override|params|private|protected|public|readonly|ref|return|sbyte|sealed|short|sizeof|stackalloc|static|string|struct|switch|this|throw|true|try|typeof|uint|ulong|unchecked|unsafe|ushort|using|virtual|void|volatile|while)\b)|(\/\/.*)";
+            MatchCollection matches = Regex.Matches(textBox1.Text, syntax, RegexOptions.Multiline);
+            int startIndex = textBox1.SelectionStart;
+            int length = textBox1.SelectionLength;
+            textBox1.SelectAll();
+            textBox1.SelectionColor = Color.Black;
+            textBox1.Select(startIndex, length);
+            foreach (Match match in matches)
+            {
+                textBox1.Select(match.Index, match.Length);
+                textBox1.SelectionColor = Color.Blue;
+                textBox1.Select(startIndex, length);
+            }
         }
     }
 }
