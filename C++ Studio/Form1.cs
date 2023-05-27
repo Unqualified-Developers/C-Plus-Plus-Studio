@@ -30,6 +30,7 @@ namespace C___Studio
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 file = fileDialog.FileName;
+                Text = $"{file} - C++ Studio";
                 try
                 {
                     using (StreamReader sr = new StreamReader(fileDialog.FileName))
@@ -62,6 +63,7 @@ namespace C___Studio
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 file = fileDialog.FileName;
+                Text = $"{file} - C++ Studio";
                 try
                 {
                     using (StreamWriter sw = new StreamWriter(fileDialog.FileName))
@@ -70,6 +72,11 @@ namespace C___Studio
                         sw.Write(textBox1.Text);
                         sw.Close();
                         sw.Dispose();
+                    }
+                    using (StreamReader sr = new StreamReader(fileDialog.FileName))
+                    {
+                        saveToolStripMenuItem.Enabled = true;
+                        textBox1.Lines = sr.ReadToEnd().Split('\n');
                     }
                 }
                 catch (Exception ex)
