@@ -158,17 +158,33 @@ namespace C___Studio
 
         private void TextChange(object sender, EventArgs e)
         {
-            string syntax = @"(\b(abstract|as|base|bool|break|byte|case|catch|char|checked|class|const|continue|decimal|default|delegate|do|double|else|enum|event|explicit|extern|false|finally|fixed|float|for|foreach|goto|if|implicit|in|int|interface|internal|is|lock|long|namespace|new|null|object|operator|out|override|params|private|protected|public|readonly|ref|return|sbyte|sealed|short|sizeof|stackalloc|static|string|struct|switch|this|throw|true|try|typeof|uint|ulong|unchecked|unsafe|ushort|using|virtual|void|volatile|while)\b)|(\/\/.*)";
-            MatchCollection matches = Regex.Matches(textBox1.Text, syntax, RegexOptions.Multiline);
+            string pres = @"(\b(include|define|ifndef|endif)\b)";
+            string classes = @"(\b(bool|char|byte|class|double|int|void|const|float|long|namespace|private|protected|public|readonly|static|string|short)\b)";
+            string keys = @"(\b(abstract|as|base|break|case|catch|checked|continue|decimal|default|delegate|delete|do|else|enum|event|explicit|extern|false|finally|fixed|for|foreach|goto|if|implicit|in|interface|internal|is|lock|new|null|object|operator|out|override|params|ref|return|sbyte|sealed|sizeof|stackalloc|struct|switch|this|throw|true|try|typeof|uint|ulong|unchecked|unsafe|ushort|using|virtual|volatile|while)\b)|(\/\/.*)";
+            MatchCollection keymatches = Regex.Matches(textBox1.Text, keys, RegexOptions.Multiline);
+            MatchCollection classmatches = Regex.Matches(textBox1.Text, classes, RegexOptions.Multiline);
+            MatchCollection prematches = Regex.Matches(textBox1.Text, pres, RegexOptions.Multiline);
             int startIndex = textBox1.SelectionStart;
             int length = textBox1.SelectionLength;
             textBox1.SelectAll();
-            textBox1.SelectionColor = Color.Black;
+            textBox1.SelectionColor = Color.White;
             textBox1.Select(startIndex, length);
-            foreach (Match match in matches)
+            foreach (Match match in keymatches)
             {
                 textBox1.Select(match.Index, match.Length);
-                textBox1.SelectionColor = Color.Blue;
+                textBox1.SelectionColor = Color.Red;
+                textBox1.Select(startIndex, length);
+            }
+            foreach (Match match in classmatches)
+            {
+                textBox1.Select(match.Index, match.Length);
+                textBox1.SelectionColor = Color.FromArgb(100, 100, 255);
+                textBox1.Select(startIndex, length);
+            }
+            foreach (Match match in prematches)
+            {
+                textBox1.Select(match.Index, match.Length);
+                textBox1.SelectionColor = Color.Orange;
                 textBox1.Select(startIndex, length);
             }
         }
