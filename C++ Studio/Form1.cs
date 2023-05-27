@@ -183,7 +183,7 @@ namespace C___Studio
             }
             foreach (Match match in prematches)
             {
-                textBox1.Select(match.Index, match.Length);
+                textBox1.Select(match.Index - 1, match.Length + 1);
                 textBox1.SelectionColor = Color.Orange;
                 textBox1.Select(startIndex, length);
             }
