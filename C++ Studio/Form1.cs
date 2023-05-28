@@ -36,7 +36,7 @@ namespace C___Studio
                     using (StreamReader sr = new StreamReader(fileDialog.FileName))
                     {
                         saveToolStripMenuItem.Enabled = true;
-                        textBox1.Lines = sr.ReadToEnd().Split('\n');
+                        textBox1.Text = sr.ReadToEnd();
                     }
                 }
                 catch (Exception ex)
