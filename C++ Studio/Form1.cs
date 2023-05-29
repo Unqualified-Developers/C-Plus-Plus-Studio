@@ -26,7 +26,7 @@ namespace C___Studio
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.Title = "Select a File";
-            fileDialog.Filter = "C++ Source Files (*.cpp)|*.cpp";
+            fileDialog.Filter = "All Supported Files (*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp)|*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp|C++ Source Files (*.cpp;*.cxx:*.c++;*.cc;*.cp)|*.cpp;*.cxx;*.cc;*.cp|C Source Files (*.c)|*.c|C/C++ Headers (*.h)|*.h";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 file = fileDialog.FileName;
@@ -165,12 +165,14 @@ namespace C___Studio
 
         private void TextChange(object sender, EventArgs e)
         {
+            string o = @"\/\/.*";
             string pres = @"(\b(include|define|ifndef|endif)\b)";
-            string classes = @"(\b(bool|char|byte|class|double|int|void|const|float|long|namespace|private|protected|public|readonly|static|string|short)\b)";
-            string keys = @"(\b(abstract|as|base|break|case|catch|checked|continue|decimal|default|delegate|delete|do|else|enum|event|explicit|extern|false|finally|fixed|for|foreach|goto|if|implicit|in|interface|internal|is|lock|new|null|object|operator|out|override|params|ref|return|sbyte|sealed|sizeof|stackalloc|struct|switch|this|throw|true|try|typeof|uint|ulong|unchecked|unsafe|ushort|using|virtual|volatile|while)\b)|(\/\/.*)";
+            string classes = @"(\b(bool|char|byte|class|double|int|void|const|float|long|namespace|private|protected|public|readonly|static|short)\b)";
+            string keys = @"(\b(abstract|as|base|break|case|catch|checked|continue|decimal|default|delegate|delete|do|else|enum|event|explicit|extern|false|finally|fixed|for|foreach|goto|if|implicit|in|interface|internal|is|lock|new|null|object|operator|out|override|params|ref|return|sbyte|sealed|sizeof|stackalloc|struct|switch|this|throw|true|try|typeof|uint|ulong|unchecked|unsafe|ushort|using|virtual|volatile|while)\b)";
             MatchCollection keymatches = Regex.Matches(textBox1.Text, keys, RegexOptions.Multiline);
             MatchCollection classmatches = Regex.Matches(textBox1.Text, classes, RegexOptions.Multiline);
             MatchCollection prematches = Regex.Matches(textBox1.Text, pres, RegexOptions.Multiline);
+            MatchCollection omatches = Regex.Matches(textBox1.Text, o, RegexOptions.Multiline);
             int startIndex = textBox1.SelectionStart;
             int length = textBox1.SelectionLength;
             textBox1.SelectAll();
@@ -192,6 +194,12 @@ namespace C___Studio
             {
                 textBox1.Select(match.Index - 1, match.Length + 1);
                 textBox1.SelectionColor = Color.Orange;
+                textBox1.Select(startIndex, length);
+            }
+            foreach (Match match in omatches)
+            {
+                textBox1.Select(match.Index, match.Length);
+                textBox1.SelectionColor = Color.FromArgb(127, 127, 127);
                 textBox1.Select(startIndex, length);
             }
         }
