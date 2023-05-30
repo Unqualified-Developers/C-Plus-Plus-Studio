@@ -9,6 +9,8 @@ namespace C___Studio
     public partial class Form1 : Form
     {
         private string file;
+        private bool needToSave = false;
+        private bool openedAFile = false;
         public Form1()
         {
             InitializeComponent();
@@ -16,10 +18,28 @@ namespace C___Studio
             textBox1.Width = Width - 15;
             textBox1.Height = Height - 61;
         }
-
+                
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            if (needToSave)
+            {
+                DialogResult r = MessageBox.Show("Do you want to save before quit?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
+                {
+                    if (openedAFile)
+                    {
+                        saveToolStripMenuItem_Click(sender, e);
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        saveAsToolStripMenuItem_Click(sender, e);
+                        Environment.Exit(0);
+                    }
+                }
+                else if (r == DialogResult.No) Environment.Exit(0);
+            }
+            else Environment.Exit(0);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -37,6 +57,7 @@ namespace C___Studio
                     {
                         saveToolStripMenuItem.Enabled = true;
                         textBox1.Text = sr.ReadToEnd();
+                        openedAFile = true;
                     }
                 }
                 catch (Exception ex)
@@ -52,6 +73,7 @@ namespace C___Studio
             sw.Write(textBox1.Text);
             sw.Close();
             sw.Dispose();
+            needToSave = false;
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,7 +98,9 @@ namespace C___Studio
                     using (StreamReader sr = new StreamReader(fileDialog.FileName))
                     {
                         saveToolStripMenuItem.Enabled = true;
-                        textBox1.Lines = sr.ReadToEnd().Split('\n');
+                        textBox1.Text = sr.ReadToEnd();
+                        needToSave = false;
+                        openedAFile = true;
                     }
                 }
                 catch (Exception ex)
@@ -165,6 +189,7 @@ namespace C___Studio
 
         private void TextChange(object sender, EventArgs e)
         {
+            needToSave = true;
             string o = @"\/\/.*";
             string pres = @"(\b(include|define|ifndef|endif)\b)";
             string classes = @"(\b(bool|char|byte|class|double|int|void|const|float|long|namespace|private|protected|public|readonly|static|short)\b)";

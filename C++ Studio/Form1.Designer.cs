@@ -1,4 +1,7 @@
-﻿namespace C___Studio
+﻿using System.Windows.Forms;
+using System;
+
+namespace C___Studio
 {
     partial class Form1
     {
@@ -13,11 +16,25 @@
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (needToSave)
             {
-                components.Dispose();
+                DialogResult r = MessageBox.Show("Do you want to save before quit?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
+                {
+                    if (openedAFile)
+                    {
+                        saveToolStripMenuItem_Click(new object(), new EventArgs());
+                        Environment.Exit(0);
+                    }
+                    else
+                    {
+                        saveAsToolStripMenuItem_Click(new object(), new EventArgs());
+                        Environment.Exit(0);
+                    }
+                }
+                else if (r == DialogResult.No) Environment.Exit(0);
             }
-            base.Dispose(disposing);
+            else Environment.Exit(0);
         }
 
         #region Windows 窗体设计器生成的代码
