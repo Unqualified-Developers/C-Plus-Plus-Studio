@@ -58,6 +58,7 @@ namespace C___Studio
                         saveToolStripMenuItem.Enabled = true;
                         textBox1.Text = sr.ReadToEnd();
                         openedAFile = true;
+                        needToSave = false;
                     }
                 }
                 catch (Exception ex)
