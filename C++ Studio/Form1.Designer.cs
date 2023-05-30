@@ -9,6 +9,14 @@ namespace C___Studio
         /// 必需的设计器变量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        public void Quit()
+        {
+            if (components != null)
+            {
+                components.Dispose();
+            }
+            base.Dispose(true);
+        }
 
         /// <summary>
         /// 清理所有正在使用的资源。
@@ -24,17 +32,17 @@ namespace C___Studio
                     if (openedAFile)
                     {
                         saveToolStripMenuItem_Click(new object(), new EventArgs());
-                        Environment.Exit(0);
+                        Quit();
                     }
                     else
                     {
                         saveAsToolStripMenuItem_Click(new object(), new EventArgs());
-                        Environment.Exit(0);
+                        Quit();
                     }
                 }
-                else if (r == DialogResult.No) Environment.Exit(0);
+                else if (r == DialogResult.No) Quit();
             }
-            else Environment.Exit(0);
+            else Quit();
         }
 
         #region Windows 窗体设计器生成的代码

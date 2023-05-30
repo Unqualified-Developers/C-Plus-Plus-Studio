@@ -29,17 +29,17 @@ namespace C___Studio
                     if (openedAFile)
                     {
                         saveToolStripMenuItem_Click(sender, e);
-                        Environment.Exit(0);
+                        Quit();
                     }
                     else
                     {
                         saveAsToolStripMenuItem_Click(sender, e);
-                        Environment.Exit(0);
+                        Quit();
                     }
                 }
-                else if (r == DialogResult.No) Environment.Exit(0);
+                else if (r == DialogResult.No) Quit();
             }
-            else Environment.Exit(0);
+            else Quit();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
