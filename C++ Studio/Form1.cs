@@ -18,6 +18,32 @@ namespace C___Studio
             textBox1.Width = Width - 15;
             textBox1.Height = Height - 61;
         }
+
+        public void OpenFile()
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Title = "Select a File";
+            fileDialog.Filter = "All Supported Files (*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp)|*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp|C++ Source Files (*.cpp;*.cxx:*.c++;*.cc;*.cp)|*.cpp;*.cxx;*.cc;*.cp|C Source Files (*.c)|*.c|C/C++ Headers (*.h)|*.h";
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                file = fileDialog.FileName;
+                Text = $"{file} - C++ Studio";
+                try
+                {
+                    using (StreamReader sr = new StreamReader(fileDialog.FileName))
+                    {
+                        saveToolStripMenuItem.Enabled = true;
+                        textBox1.Text = sr.ReadToEnd();
+                        openedAFile = true;
+                        needToSave = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Kidding", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
                 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -44,28 +70,25 @@ namespace C___Studio
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Title = "Select a File";
-            fileDialog.Filter = "All Supported Files (*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp)|*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp|C++ Source Files (*.cpp;*.cxx:*.c++;*.cc;*.cp)|*.cpp;*.cxx;*.cc;*.cp|C Source Files (*.c)|*.c|C/C++ Headers (*.h)|*.h";
-            if (fileDialog.ShowDialog() == DialogResult.OK)
+            if (needToSave)
             {
-                file = fileDialog.FileName;
-                Text = $"{file} - C++ Studio";
-                try
+                DialogResult r = MessageBox.Show("Do you want to save before quit?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
                 {
-                    using (StreamReader sr = new StreamReader(fileDialog.FileName))
+                    if (openedAFile)
                     {
-                        saveToolStripMenuItem.Enabled = true;
-                        textBox1.Text = sr.ReadToEnd();
-                        openedAFile = true;
-                        needToSave = false;
+                        saveToolStripMenuItem_Click(sender, e);
+                        OpenFile();
+                    }
+                    else
+                    {
+                        saveAsToolStripMenuItem_Click(sender, e);
+                        OpenFile();
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: " + ex.Message, "Kidding", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                else if (r == DialogResult.No) OpenFile();
             }
+            else OpenFile();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
