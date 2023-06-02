@@ -105,7 +105,7 @@ namespace C___Studio
             SaveFileDialog fileDialog = new SaveFileDialog();
             fileDialog.Title = "Save File";
             fileDialog.FileName = file;
-            fileDialog.Filter = "C++ Source Files (*.cpp)|*.cpp";
+            fileDialog.Filter = "All Supported Files (*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp)|*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp|C++ Source Files (*.cpp;*.cxx:*.c++;*.cc;*.cp)|*.cpp;*.cxx;*.cc;*.cp|C Source Files (*.c)|*.c|C/C++ Headers (*.h)|*.h";
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 file = fileDialog.FileName;
