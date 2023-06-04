@@ -201,6 +201,7 @@ namespace C___Studio
         {
             needToSave = true;
             string o = @"\/\/.*";
+            string strs = "\".*\"";
             string pres = @"(\b(include|define|ifndef|endif)\b)";
             string classes = @"(\b(bool|char|byte|class|double|int|void|const|float|long|namespace|private|protected|public|readonly|static|short)\b)";
             string keys = @"(\b(abstract|as|base|break|case|catch|checked|continue|decimal|default|delegate|delete|do|else|enum|event|explicit|extern|false|finally|fixed|for|foreach|goto|if|implicit|in|interface|internal|is|lock|new|null|object|operator|out|override|params|ref|return|sbyte|sealed|sizeof|stackalloc|struct|switch|this|throw|true|try|typeof|uint|ulong|unchecked|unsafe|ushort|using|virtual|volatile|while)\b)";
@@ -208,6 +209,7 @@ namespace C___Studio
             MatchCollection classmatches = Regex.Matches(textBox1.Text, classes, RegexOptions.Multiline);
             MatchCollection prematches = Regex.Matches(textBox1.Text, pres, RegexOptions.Multiline);
             MatchCollection omatches = Regex.Matches(textBox1.Text, o, RegexOptions.Multiline);
+            MatchCollection strmatches = Regex.Matches(textBox1.Text, strs, RegexOptions.Multiline);
             int startIndex = textBox1.SelectionStart;
             int length = textBox1.SelectionLength;
             textBox1.SelectAll();
@@ -235,6 +237,12 @@ namespace C___Studio
             {
                 textBox1.Select(match.Index, match.Length);
                 textBox1.SelectionColor = Color.FromArgb(127, 127, 127);
+                textBox1.Select(startIndex, length);
+            }
+            foreach (Match match in strmatches)
+            {
+                textBox1.Select(match.Index, match.Length);
+                textBox1.SelectionColor = Color.FromArgb(100, 255, 100);
                 textBox1.Select(startIndex, length);
             }
         }
