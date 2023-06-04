@@ -190,20 +190,6 @@ namespace C___Studio
             }
         }
 
-        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Cursor = Cursors.WaitCursor;
-                textBox1.Undo();
-                Cursor = Cursors.Default;
-            }
-            catch (Exception)
-            {
-                Cursor = Cursors.Default;
-            }
-        }
-
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
