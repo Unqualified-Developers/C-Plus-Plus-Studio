@@ -201,7 +201,7 @@ namespace C___Studio
         {
             needToSave = true;
             string o = @"\/\/.*";
-            string strs = "\".*\"";
+            string strs = "\".*\"|'.*'";
             string pres = @"(\b(include|define|ifndef|endif)\b)";
             string classes = @"(\b(bool|char|byte|class|double|int|void|const|float|long|namespace|private|protected|public|readonly|static|short)\b)";
             string keys = @"(\b(abstract|as|base|break|case|catch|checked|continue|decimal|default|delegate|delete|do|else|enum|event|explicit|extern|false|finally|fixed|for|foreach|goto|if|implicit|in|interface|internal|is|lock|new|null|object|operator|out|override|params|ref|return|sbyte|sealed|sizeof|stackalloc|struct|switch|this|throw|true|try|typeof|uint|ulong|unchecked|unsafe|ushort|using|virtual|volatile|while)\b)";
