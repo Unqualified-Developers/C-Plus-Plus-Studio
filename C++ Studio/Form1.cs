@@ -202,7 +202,7 @@ namespace C___Studio
             needToSave = true;
             string o = @"\/\/.*";
             string strs = "\".*\"|'.*'";
-            string pres = @"(\b(include|define|ifndef|endif)\b)";
+            string pres = @"(\b(include|define|ifndef|endif|undef)\b)";
             string classes = @"(\b(bool|char|byte|class|double|int|void|const|float|long|namespace|private|protected|public|readonly|static|short)\b)";
             string keys = @"(\b(abstract|as|base|break|case|catch|checked|continue|decimal|default|delegate|delete|do|else|enum|event|explicit|extern|false|finally|fixed|for|foreach|goto|if|implicit|in|interface|internal|is|lock|new|null|object|operator|out|override|params|ref|return|sbyte|sealed|sizeof|stackalloc|struct|switch|this|throw|true|try|typeof|uint|ulong|unchecked|unsafe|ushort|using|virtual|volatile|while)\b)";
             MatchCollection keymatches = Regex.Matches(textBox1.Text, keys, RegexOptions.Multiline);
@@ -247,12 +247,40 @@ namespace C___Studio
             }
         }
 
-        private void optimizeToolStripMenuItem_Click(object sender, EventArgs e)
+        public void Compile()
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             process.StartInfo.FileName = ".\\MinGW\\bin\\g++.exe";
-            process.StartInfo.Arguments = $"{file} -o {file}";
-            process.Start();
+            string filebc;
+            if (file.EndsWith(".cpp") || file.EndsWith(".cxx") || file.EndsWith(".c++")) filebc = file.Substring(0, file.Length - 4);
+            else if (file.EndsWith(".c")) filebc = file.Substring(0, file.Length - 2);
+            else filebc = file.Substring(0, file.Length - 3);
+            process.StartInfo.Arguments = $"{file} -o {filebc}.exe";
+            try { process.Start(); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void optimizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (needToSave)
+            {
+                DialogResult r = MessageBox.Show("Do you want to save before quit?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
+                {
+                    if (openedAFile)
+                    {
+                        saveToolStripMenuItem_Click(sender, e);
+                        Compile();
+                    }
+                    else
+                    {
+                        saveAsToolStripMenuItem_Click(sender, e);
+                        Compile();
+                    }
+                }
+                else if (r == DialogResult.No) Compile();
+            }
+            else Compile();
         }
     }
 }
