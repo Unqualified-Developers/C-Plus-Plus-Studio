@@ -246,5 +246,13 @@ namespace C___Studio
                 textBox1.Select(startIndex, length);
             }
         }
+
+        private void optimizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = ".\\MinGW\\bin\\g++.exe";
+            process.StartInfo.Arguments = $"{file} -o {file}";
+            process.Start();
+        }
     }
 }
