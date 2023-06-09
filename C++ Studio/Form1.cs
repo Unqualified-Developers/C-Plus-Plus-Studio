@@ -252,11 +252,13 @@ namespace C___Studio
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             process.StartInfo.FileName = ".\\MinGW\\bin\\g++.exe";
             string filebc;
-            if (file.EndsWith(".cpp") || file.EndsWith(".cxx") || file.EndsWith(".c++")) filebc = file.Substring(0, file.Length - 4);
-            else if (file.EndsWith(".c")) filebc = file.Substring(0, file.Length - 2);
-            else filebc = file.Substring(0, file.Length - 3);
-            process.StartInfo.Arguments = $"{file} -o {filebc}.exe";
-            try { process.Start(); }
+            try
+            {
+                if (file.EndsWith(".cpp") || file.EndsWith(".cxx") || file.EndsWith(".c++")) filebc = file.Substring(0, file.Length - 4);
+                else if (file.EndsWith(".c")) filebc = file.Substring(0, file.Length - 2);
+                else filebc = file.Substring(0, file.Length - 3);
+                process.StartInfo.Arguments = $"{file} -o {filebc}.exe"; process.Start(); 
+            }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
@@ -264,7 +266,7 @@ namespace C___Studio
         {
             if (needToSave)
             {
-                DialogResult r = MessageBox.Show("Do you want to save before quit?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult r = MessageBox.Show("Do you want to save before compile?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
                 {
                     if (openedAFile)
