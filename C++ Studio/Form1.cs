@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Drawing;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -283,6 +283,11 @@ namespace C___Studio
                 else if (r == DialogResult.No) Compile();
             }
             else Compile();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Version 1.0.0.0 Alpha 1\nCopyright ©  2023  (Python Object Developers)\nWelcome to contribute code!", "About C++ Studio", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
