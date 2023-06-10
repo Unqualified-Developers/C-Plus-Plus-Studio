@@ -266,7 +266,7 @@ namespace C___Studio
         {
             if (needToSave)
             {
-                DialogResult r = MessageBox.Show("Do you want to save before compiling?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult r = MessageBox.Show("Do you want to save before compile?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
                 {
                     if (openedAFile)
