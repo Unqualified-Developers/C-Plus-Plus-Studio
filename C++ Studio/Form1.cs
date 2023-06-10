@@ -266,7 +266,7 @@ namespace C___Studio
         {
             if (needToSave)
             {
-                DialogResult r = MessageBox.Show("Do you want to save before compile?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult r = MessageBox.Show("Do you want to save before compiling?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
                 {
                     if (openedAFile)
@@ -313,7 +313,7 @@ namespace C___Studio
         {
             if (needToSave)
             {
-                DialogResult r = MessageBox.Show("Do you want to save before create a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult r = MessageBox.Show("Do you want to save before creating a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
                 {
                     if (openedAFile)
@@ -336,7 +336,7 @@ namespace C___Studio
         {
             if (needToSave)
             {
-                DialogResult r = MessageBox.Show("Do you want to save before create a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult r = MessageBox.Show("Do you want to save before creating a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
                 {
                     if (openedAFile)
@@ -364,7 +364,7 @@ namespace C___Studio
         {
             if (needToSave)
             {
-                DialogResult r = MessageBox.Show("Do you want to save before create a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                DialogResult r = MessageBox.Show("Do you want to save before creating a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
                 {
                     if (openedAFile)
