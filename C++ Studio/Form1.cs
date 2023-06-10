@@ -287,7 +287,65 @@ namespace C___Studio
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Version 1.0.0.0 Alpha 1\nCopyright ©  2023  (Python Object Developers)\nWelcome to contribute code!", "About C++ Studio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Version 1.0.0.0 Alpha 2\nCopyright ©  2023  (Python Object Developers)\nWelcome to contribute code!", "About C++ Studio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public void NewEmpty()
+        {
+            textBox1.Text = "int main() {\n    \n    return 0;\n}\n";
+            needToSave = false;
+        }
+
+        public void NewCmdProgram()
+        {
+            textBox1.Text = "#include <iostream>\nusing namespace std;\n\n// Main function.\nint main() {\n    cout << \"Hello World!\" << endl;\n    return 0;\n}\n";
+            needToSave = false;
+        }
+
+        private void emptyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (needToSave)
+            {
+                DialogResult r = MessageBox.Show("Do you want to save before create a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
+                {
+                    if (openedAFile)
+                    {
+                        saveToolStripMenuItem_Click(sender, e);
+                        NewEmpty();
+                    }
+                    else
+                    {
+                        saveAsToolStripMenuItem_Click(sender, e);
+                        NewEmpty();
+                    }
+                }
+                else if (r == DialogResult.No) NewEmpty();
+            }
+            else NewEmpty();
+        }
+
+        private void commandProgramToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (needToSave)
+            {
+                DialogResult r = MessageBox.Show("Do you want to save before create a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
+                {
+                    if (openedAFile)
+                    {
+                        saveToolStripMenuItem_Click(sender, e);
+                        NewCmdProgram();
+                    }
+                    else
+                    {
+                        saveAsToolStripMenuItem_Click(sender, e);
+                        NewCmdProgram();
+                    }
+                }
+                else if (r == DialogResult.No) NewCmdProgram();
+            }
+            else NewCmdProgram();
         }
     }
 }
