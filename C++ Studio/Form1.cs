@@ -287,7 +287,7 @@ namespace C___Studio
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Version 1.0.0.0 Alpha 2\nCopyright ©  2023  (Python Object Developers)\nWelcome to contribute code!", "About C++ Studio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Version 1.0.0.0 Alpha 2\nCopyright ©  2023  (Python Object Developers)\nCompiler: MinGW-W64\nWelcome to contribute code!", "About C++ Studio", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void NewEmpty()
@@ -301,6 +301,13 @@ namespace C___Studio
             textBox1.Text = "#include <iostream>\nusing namespace std;\n\n// Main function.\nint main() {\n    cout << \"Hello World!\" << endl;\n    return 0;\n}\n";
             needToSave = false;
         }
+        
+        public void NewWFProgram()
+        {
+            textBox1.Text = "#include <windows.h>\n\nLRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);\n\nint WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)\n{\n    // Register the window class\n    const char CLASS_NAME[]  = \"My Window Class\";\n\n    WNDCLASS wc = { };\n\n    wc.lpfnWndProc   = WndProc;\n    wc.hInstance     = hInstance;\n    wc.lpszClassName = CLASS_NAME;\n\n    RegisterClass(&wc);\n\n    // Create the window\n    HWND hwnd = CreateWindowEx(\n        0,                              // Optional window styles\n        CLASS_NAME,                     // Window class\n        \"Form\",                         // Window text\n        WS_OVERLAPPEDWINDOW,            // Window style\n\n        // Size and position\n        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,\n\n        NULL,       // Parent window\n        NULL,       // Menu\n        hInstance,  // Instance handle\n        NULL        // Additional application data\n        );\n\n    if (hwnd == NULL)\n    {\n        return 0;\n    }\n\n    // Show the window\n    ShowWindow(hwnd, nCmdShow);\n\n    // Run the message loop\n    MSG msg = { };\n    while (GetMessage(&msg, NULL, 0, 0))\n    {\n        TranslateMessage(&msg);\n        DispatchMessage(&msg);\n    }\n\n    return 0;\n}\n\nLRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)\n{\n    switch (msg)\n    {\n        case WM_DESTROY:\n            PostQuitMessage(0);\n            break;\n\n        default:\n            return DefWindowProc(hwnd, msg, wParam, lParam);\n    }\n\n    return 0;\n}";
+            needToSave = false;
+        }
+
 
         private void emptyToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -346,6 +353,34 @@ namespace C___Studio
                 else if (r == DialogResult.No) NewCmdProgram();
             }
             else NewCmdProgram();
+        }
+
+        private void releasesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/Python-Object-Developers/C-Plus-Plus-Studio/releases");
+        }
+
+        private void windowsFormProgramToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (needToSave)
+            {
+                DialogResult r = MessageBox.Show("Do you want to save before create a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
+                {
+                    if (openedAFile)
+                    {
+                        saveToolStripMenuItem_Click(sender, e);
+                        NewWFProgram();
+                    }
+                    else
+                    {
+                        saveAsToolStripMenuItem_Click(sender, e);
+                        NewWFProgram();
+                    }
+                }
+                else if (r == DialogResult.No) NewWFProgram();
+            }
+            else NewWFProgram();
         }
     }
 }
