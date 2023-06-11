@@ -293,19 +293,25 @@ namespace C___Studio
         public void NewEmpty()
         {
             textBox1.Text = "int main() {\n    \n    return 0;\n}\n";
-            needToSave = false;
+            openedAFile = false;
+            file = null;
+            Text = "C++ Studio";
         }
 
         public void NewCmdProgram()
         {
             textBox1.Text = "#include <iostream>\nusing namespace std;\n\n// Main function.\nint main() {\n    cout << \"Hello World!\" << endl;\n    return 0;\n}\n";
-            needToSave = false;
+            openedAFile = false;
+            file = null;
+            Text = "C++ Studio";
         }
         
         public void NewWFProgram()
         {
             textBox1.Text = "#include <windows.h>\n\nLRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);\n\nint WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)\n{\n    // Register the window class\n    const char CLASS_NAME[]  = \"My Window Class\";\n\n    WNDCLASS wc = { };\n\n    wc.lpfnWndProc   = WndProc;\n    wc.hInstance     = hInstance;\n    wc.lpszClassName = CLASS_NAME;\n\n    RegisterClass(&wc);\n\n    // Create the window\n    HWND hwnd = CreateWindowEx(\n        0,                              // Optional window styles\n        CLASS_NAME,                     // Window class\n        \"Form\",                         // Window text\n        WS_OVERLAPPEDWINDOW,            // Window style\n\n        // Size and position\n        CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,\n\n        NULL,       // Parent window\n        NULL,       // Menu\n        hInstance,  // Instance handle\n        NULL        // Additional application data\n        );\n\n    if (hwnd == NULL)\n    {\n        return 0;\n    }\n\n    // Show the window\n    ShowWindow(hwnd, nCmdShow);\n\n    // Run the message loop\n    MSG msg = { };\n    while (GetMessage(&msg, NULL, 0, 0))\n    {\n        TranslateMessage(&msg);\n        DispatchMessage(&msg);\n    }\n\n    return 0;\n}\n\nLRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)\n{\n    switch (msg)\n    {\n        case WM_DESTROY:\n            PostQuitMessage(0);\n            break;\n\n        default:\n            return DefWindowProc(hwnd, msg, wParam, lParam);\n    }\n\n    return 0;\n}";
-            needToSave = false;
+            openedAFile = false;
+            file = null;
+            Text = "C++ Studio";
         }
 
 
