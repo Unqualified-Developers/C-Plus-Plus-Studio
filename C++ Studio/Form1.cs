@@ -401,11 +401,10 @@ namespace C___Studio
                 else filebc = file.Substring(0, file.Length - 3);
                 process.StartInfo.Arguments = $"-g {file} -o {filebc}.exe";
                 process.Start();
-                process.WaitForExit();
-                System.Diagnostics.Process p = new System.Diagnostics.Process();
-                p.StartInfo.FileName = ".\\MinGW\\bin\\gdb.exe";
-                p.StartInfo.Arguments = $"{filebc}.exe";
-                p.Start();
+                process.WaitForExit();                
+                process.StartInfo.FileName = ".\\MinGW\\bin\\gdb.exe";
+                process.StartInfo.Arguments = $"{filebc}.exe";
+                process.Start();                
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
