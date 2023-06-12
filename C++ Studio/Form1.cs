@@ -397,7 +397,11 @@ namespace C___Studio
             try
             {
                 if (file.EndsWith(".cpp") || file.EndsWith(".cxx") || file.EndsWith(".c++")) filebc = file.Substring(0, file.Length - 4);
-                else if (file.EndsWith(".c")) filebc = file.Substring(0, file.Length - 2);
+                else if (file.EndsWith(".c"))
+                {
+                    filebc = file.Substring(0, file.Length - 2);
+                    process.StartInfo.FileName = ".\\MinGW\\bin\\gcc.exe";
+                }
                 else filebc = file.Substring(0, file.Length - 3);
                 process.StartInfo.Arguments = $"-g {file} -o {filebc}.exe";
                 process.Start();
