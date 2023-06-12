@@ -58,6 +58,7 @@ namespace C___Studio
             this.newSourceFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emptyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.commandProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowsFormProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,9 +72,9 @@ namespace C___Studio
             this.optimizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.RichTextBox();
             this.releasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.windowsFormProgramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox1 = new System.Windows.Forms.RichTextBox();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -112,34 +113,41 @@ namespace C___Studio
             this.commandProgramToolStripMenuItem,
             this.windowsFormProgramToolStripMenuItem});
             this.newSourceFileToolStripMenuItem.Name = "newSourceFileToolStripMenuItem";
-            this.newSourceFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newSourceFileToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.newSourceFileToolStripMenuItem.Text = "New Source File";
             // 
             // emptyToolStripMenuItem
             // 
             this.emptyToolStripMenuItem.Name = "emptyToolStripMenuItem";
-            this.emptyToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.emptyToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.emptyToolStripMenuItem.Text = "Empty";
             this.emptyToolStripMenuItem.Click += new System.EventHandler(this.emptyToolStripMenuItem_Click);
             // 
             // commandProgramToolStripMenuItem
             // 
             this.commandProgramToolStripMenuItem.Name = "commandProgramToolStripMenuItem";
-            this.commandProgramToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.commandProgramToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
             this.commandProgramToolStripMenuItem.Text = "Command Program";
             this.commandProgramToolStripMenuItem.Click += new System.EventHandler(this.commandProgramToolStripMenuItem_Click);
+            // 
+            // windowsFormProgramToolStripMenuItem
+            // 
+            this.windowsFormProgramToolStripMenuItem.Name = "windowsFormProgramToolStripMenuItem";
+            this.windowsFormProgramToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.windowsFormProgramToolStripMenuItem.Text = "Windows Form Program";
+            this.windowsFormProgramToolStripMenuItem.Click += new System.EventHandler(this.windowsFormProgramToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -147,14 +155,14 @@ namespace C___Studio
             // 
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -201,7 +209,8 @@ namespace C___Studio
             // compileToolStripMenuItem
             // 
             this.compileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optimizeToolStripMenuItem});
+            this.optimizeToolStripMenuItem,
+            this.debugToolStripMenuItem});
             this.compileToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.compileToolStripMenuItem.Name = "compileToolStripMenuItem";
             this.compileToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
@@ -210,7 +219,7 @@ namespace C___Studio
             // optimizeToolStripMenuItem
             // 
             this.optimizeToolStripMenuItem.Name = "optimizeToolStripMenuItem";
-            this.optimizeToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.optimizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.optimizeToolStripMenuItem.Text = "Optimize";
             this.optimizeToolStripMenuItem.Click += new System.EventHandler(this.optimizeToolStripMenuItem_Click);
             // 
@@ -227,9 +236,16 @@ namespace C___Studio
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // releasesToolStripMenuItem
+            // 
+            this.releasesToolStripMenuItem.Name = "releasesToolStripMenuItem";
+            this.releasesToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.releasesToolStripMenuItem.Text = "Releases";
+            this.releasesToolStripMenuItem.Click += new System.EventHandler(this.releasesToolStripMenuItem_Click);
             // 
             // textBox1
             // 
@@ -237,40 +253,33 @@ namespace C___Studio
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.textBox1.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(0, 25);
+            this.textBox1.Location = new System.Drawing.Point(0, 23);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(801, 427);
+            this.textBox1.Size = new System.Drawing.Size(801, 394);
             this.textBox1.TabIndex = 1;
             this.textBox1.TabStop = false;
             this.textBox1.Text = "";
             this.textBox1.WordWrap = false;
             this.textBox1.TextChanged += new System.EventHandler(this.TextChange);
             // 
-            // releasesToolStripMenuItem
+            // debugToolStripMenuItem
             // 
-            this.releasesToolStripMenuItem.Name = "releasesToolStripMenuItem";
-            this.releasesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.releasesToolStripMenuItem.Text = "Releases";
-            this.releasesToolStripMenuItem.Click += new System.EventHandler(this.releasesToolStripMenuItem_Click);
-            // 
-            // windowsFormProgramToolStripMenuItem
-            // 
-            this.windowsFormProgramToolStripMenuItem.Name = "windowsFormProgramToolStripMenuItem";
-            this.windowsFormProgramToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
-            this.windowsFormProgramToolStripMenuItem.Text = "Windows Form Program";
-            this.windowsFormProgramToolStripMenuItem.Click += new System.EventHandler(this.windowsFormProgramToolStripMenuItem_Click);
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 415);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.Color.White;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(256, 135);
+            this.MinimumSize = new System.Drawing.Size(256, 128);
             this.Name = "Form1";
             this.Text = "C++ Studio";
             this.Resize += new System.EventHandler(this.FormResize);
@@ -303,6 +312,7 @@ namespace C___Studio
         private ToolStripMenuItem commandProgramToolStripMenuItem;
         private ToolStripMenuItem releasesToolStripMenuItem;
         private ToolStripMenuItem windowsFormProgramToolStripMenuItem;
+        private ToolStripMenuItem debugToolStripMenuItem;
     }
 }
 

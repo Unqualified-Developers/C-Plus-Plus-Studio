@@ -388,5 +388,49 @@ namespace C___Studio
             }
             else NewWFProgram();
         }
+
+        public void Debug() 
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = ".\\MinGW\\bin\\g++.exe";
+            string filebc;
+            try
+            {
+                if (file.EndsWith(".cpp") || file.EndsWith(".cxx") || file.EndsWith(".c++")) filebc = file.Substring(0, file.Length - 4);
+                else if (file.EndsWith(".c")) filebc = file.Substring(0, file.Length - 2);
+                else filebc = file.Substring(0, file.Length - 3);
+                process.StartInfo.Arguments = $"-g {file} -o {filebc}.exe";
+                process.Start();
+                process.WaitForExit();
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                p.StartInfo.FileName = ".\\MinGW\\bin\\gdb.exe";
+                p.StartInfo.Arguments = $"{filebc}.exe";
+                p.Start();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (needToSave)
+            {
+                DialogResult r = MessageBox.Show("Do you want to save before compile?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (r == DialogResult.Yes)
+                {
+                    if (openedAFile)
+                    {
+                        saveToolStripMenuItem_Click(sender, e);
+                        Debug();
+                    }
+                    else
+                    {
+                        saveAsToolStripMenuItem_Click(sender, e);
+                        Debug();
+                    }
+                }
+                else if (r == DialogResult.No) Debug();
+            }
+            else Debug();
+        }
     }
 }
