@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using System;
+using System.Drawing;
 
 namespace C___Studio
 {
@@ -70,11 +71,11 @@ namespace C___Studio
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optimizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.releasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.RichTextBox();
-            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox1 = new ScintillaNET.Scintilla();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,7 +90,8 @@ namespace C___Studio
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 25);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(495, 27);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -219,9 +221,16 @@ namespace C___Studio
             // optimizeToolStripMenuItem
             // 
             this.optimizeToolStripMenuItem.Name = "optimizeToolStripMenuItem";
-            this.optimizeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.optimizeToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.optimizeToolStripMenuItem.Text = "Optimize";
             this.optimizeToolStripMenuItem.Click += new System.EventHandler(this.optimizeToolStripMenuItem_Click);
+            // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -249,37 +258,33 @@ namespace C___Studio
             // 
             // textBox1
             // 
-            this.textBox1.AcceptsTab = true;
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
-            this.textBox1.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.White;
+            this.textBox1.FontQuality = ScintillaNET.FontQuality.LcdOptimized;
+            this.textBox1.Lexer = ScintillaNET.Lexer.Cpp;
             this.textBox1.Location = new System.Drawing.Point(0, 23);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(801, 394);
+            this.textBox1.Size = new System.Drawing.Size(496, 276);
             this.textBox1.TabIndex = 1;
-            this.textBox1.TabStop = false;
-            this.textBox1.Text = "";
-            this.textBox1.WordWrap = false;
-            this.textBox1.TextChanged += new System.EventHandler(this.TextChange);
-            // 
-            // debugToolStripMenuItem
-            // 
-            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.debugToolStripMenuItem.Text = "Debug";
-            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
+            textBox1.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = Color.DarkOrange;
+            textBox1.TextChanged += new EventHandler(OnTextChanged);
+            textBox1.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = Color.RoyalBlue;
+            textBox1.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = Color.DimGray;
+            textBox1.Styles[ScintillaNET.Style.Cpp.String].ForeColor = Color.ForestGreen;
+            textBox1.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = Color.DimGray;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlText;
-            this.ClientSize = new System.Drawing.Size(800, 415);
+            this.ClientSize = new System.Drawing.Size(495, 298);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Consolas", 12F);
             this.ForeColor = System.Drawing.Color.White;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(256, 128);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(376, 180);
             this.Name = "Form1";
             this.Text = "C++ Studio";
             this.Resize += new System.EventHandler(this.FormResize);
@@ -297,7 +302,6 @@ namespace C___Studio
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.RichTextBox textBox1;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
@@ -313,6 +317,7 @@ namespace C___Studio
         private ToolStripMenuItem releasesToolStripMenuItem;
         private ToolStripMenuItem windowsFormProgramToolStripMenuItem;
         private ToolStripMenuItem debugToolStripMenuItem;
+        private ScintillaNET.Scintilla textBox1;
     }
 }
 
