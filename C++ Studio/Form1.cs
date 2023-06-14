@@ -394,5 +394,19 @@ namespace C___Studio
             }
             else Debug();
         }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            textBox1.Undo();
+            Cursor = Cursors.Default;
+        }
+
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Cursor = Cursors.WaitCursor;
+            textBox1.Redo();
+            Cursor = Cursors.Default;
+        }
     }
 }

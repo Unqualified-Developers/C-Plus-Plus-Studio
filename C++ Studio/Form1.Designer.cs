@@ -76,6 +76,8 @@ namespace C___Studio
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.releasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new ScintillaNET.Scintilla();
+            this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -174,7 +176,9 @@ namespace C___Studio
             this.selectAllToolStripMenuItem,
             this.copyToolStripMenuItem,
             this.cutToolStripMenuItem,
-            this.pasteToolStripMenuItem});
+            this.pasteToolStripMenuItem,
+            this.undoToolStripMenuItem,
+            this.redoToolStripMenuItem});
             this.editToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(42, 21);
@@ -183,28 +187,28 @@ namespace C___Studio
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // cutToolStripMenuItem
             // 
             this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cutToolStripMenuItem.Text = "Cut";
             this.cutToolStripMenuItem.Click += new System.EventHandler(this.cutToolStripMenuItem_Click);
             // 
             // pasteToolStripMenuItem
             // 
             this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pasteToolStripMenuItem.Text = "Paste";
             this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
             // 
@@ -265,22 +269,21 @@ namespace C___Studio
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(496, 276);
             this.textBox1.TabIndex = 1;
-            textBox1.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = Color.Orange;
-            textBox1.TextChanged += new EventHandler(OnTextChanged);
-            textBox1.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = Color.RoyalBlue;
-            textBox1.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = Color.DimGray;
-            textBox1.Styles[ScintillaNET.Style.Cpp.String].ForeColor = Color.ForestGreen;
-            textBox1.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = Color.DimGray;
-            textBox1.Styles[ScintillaNET.Style.Cpp.Default].Font = "Consolas";
-            textBox1.Styles[ScintillaNET.Style.Cpp.Default].Size = 11;
-            textBox1.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = Color.FromArgb(0, 0, 255);
-            textBox1.SetKeywords(0, "auto break case catch char class const continue default delete do double else enum explicit extern false float for friend goto if inline int long mutable namespace new operator private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this throw true try typedef typeid typename union unsigned using virtual void volatile while");
-            textBox1.Margins[0].Width = 40;
-            textBox1.Margins[0].Type = ScintillaNET.MarginType.Number;
-            textBox1.Styles[ScintillaNET.Style.LineNumber].Font = "Consolas";
-            textBox1.Styles[ScintillaNET.Style.LineNumber].Size = 10;
-            textBox1.Styles[ScintillaNET.Style.LineNumber].ForeColor = Color.Black;
-            textBox1.Styles[ScintillaNET.Style.LineNumber].BackColor = Color.LightGray;
+            this.textBox1.TextChanged += new System.EventHandler(this.OnTextChanged);
+            // 
+            // undoToolStripMenuItem
+            // 
+            this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.undoToolStripMenuItem.Text = "Undo";
+            this.undoToolStripMenuItem.Click += new System.EventHandler(this.undoToolStripMenuItem_Click);
+            // 
+            // redoToolStripMenuItem
+            // 
+            this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.redoToolStripMenuItem.Text = "Redo";
+            this.redoToolStripMenuItem.Click += new System.EventHandler(this.redoToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -328,6 +331,8 @@ namespace C___Studio
         private ToolStripMenuItem windowsFormProgramToolStripMenuItem;
         private ToolStripMenuItem debugToolStripMenuItem;
         private ScintillaNET.Scintilla textBox1;
+        private ToolStripMenuItem undoToolStripMenuItem;
+        private ToolStripMenuItem redoToolStripMenuItem;
     }
 }
 
