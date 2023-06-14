@@ -268,7 +268,7 @@ namespace C___Studio
             this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(496, 276);
-            this.textBox1.TabIndex = 1;
+            this.textBox1.TabStop = false;
             this.textBox1.TextChanged += new System.EventHandler(this.OnTextChanged);
             // 
             // undoToolStripMenuItem

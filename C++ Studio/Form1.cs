@@ -17,6 +17,21 @@ namespace C___Studio
             menuStrip1.Width = Width;
             textBox1.Width = Width - 15;
             textBox1.Height = Height - 61;
+            textBox1.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = Color.Orange;
+            textBox1.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = Color.RoyalBlue;
+            textBox1.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = Color.DimGray;
+            textBox1.Styles[ScintillaNET.Style.Cpp.String].ForeColor = Color.ForestGreen;
+            textBox1.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = Color.DimGray;
+            textBox1.Styles[ScintillaNET.Style.Cpp.Default].Font = "Consolas";
+            textBox1.Styles[ScintillaNET.Style.Cpp.Default].Size = 11;
+            textBox1.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = Color.FromArgb(0, 0, 255);
+            textBox1.SetKeywords(0, "auto break case catch char class const continue default delete do double else enum explicit extern false float for friend goto if inline int long mutable namespace new operator private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this throw true try typedef typeid typename union unsigned using virtual void volatile while");
+            textBox1.Margins[0].Width = 40;
+            textBox1.Margins[0].Type = ScintillaNET.MarginType.Number;
+            textBox1.Styles[ScintillaNET.Style.LineNumber].Font = "Consolas";
+            textBox1.Styles[ScintillaNET.Style.LineNumber].Size = 10;
+            textBox1.Styles[ScintillaNET.Style.LineNumber].ForeColor = Color.Black;
+            textBox1.Styles[ScintillaNET.Style.LineNumber].BackColor = Color.LightGray;
         }
 
         public void OpenFile()
