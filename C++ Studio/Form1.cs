@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using ScintillaNET;
 
 namespace C___Studio
 {
@@ -17,28 +17,30 @@ namespace C___Studio
             menuStrip1.Width = Width;
             textBox1.Width = Width - 15;
             textBox1.Height = Height - 61;
-            textBox1.Styles[ScintillaNET.Style.Cpp.Preprocessor].ForeColor = Color.Orange;
-            textBox1.Styles[ScintillaNET.Style.Cpp.Number].ForeColor = Color.RoyalBlue;
-            textBox1.Styles[ScintillaNET.Style.Cpp.Comment].ForeColor = Color.DimGray;
-            textBox1.Styles[ScintillaNET.Style.Cpp.String].ForeColor = Color.ForestGreen;
-            textBox1.Styles[ScintillaNET.Style.Cpp.CommentLine].ForeColor = Color.DimGray;
-            textBox1.Styles[ScintillaNET.Style.Cpp.Default].Font = "Consolas";
-            textBox1.Styles[ScintillaNET.Style.Cpp.Default].Size = 11;
-            textBox1.Styles[ScintillaNET.Style.Cpp.Word].ForeColor = Color.FromArgb(0, 0, 255);
+            textBox1.Styles[Style.Cpp.Preprocessor].ForeColor = Color.Orange;
+            textBox1.Styles[Style.Cpp.Number].ForeColor = Color.RoyalBlue;
+            textBox1.Styles[Style.Cpp.Comment].ForeColor = Color.DimGray;
+            textBox1.Styles[Style.Cpp.String].ForeColor = Color.ForestGreen;
+            textBox1.Styles[Style.Cpp.CommentLine].ForeColor = Color.DimGray;
+            textBox1.Styles[Style.Cpp.Default].Font = "Consolas";
+            textBox1.Styles[Style.Cpp.Default].Size = 11;
+            textBox1.Styles[Style.Cpp.Word].ForeColor = Color.FromArgb(0, 0, 255);
             textBox1.SetKeywords(0, "auto break case catch char class const continue default delete do double else enum explicit extern false float for friend goto if inline int long mutable namespace new operator private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this throw true try typedef typeid typename union unsigned using virtual void volatile while");
             textBox1.Margins[0].Width = 40;
-            textBox1.Margins[0].Type = ScintillaNET.MarginType.Number;
-            textBox1.Styles[ScintillaNET.Style.LineNumber].Font = "Consolas";
-            textBox1.Styles[ScintillaNET.Style.LineNumber].Size = 10;
-            textBox1.Styles[ScintillaNET.Style.LineNumber].ForeColor = Color.Black;
-            textBox1.Styles[ScintillaNET.Style.LineNumber].BackColor = Color.LightGray;
+            textBox1.Margins[0].Type = MarginType.Number;
+            textBox1.Styles[Style.LineNumber].Font = "Consolas";
+            textBox1.Styles[Style.LineNumber].Size = 10;
+            textBox1.Styles[Style.LineNumber].ForeColor = Color.Black;
+            textBox1.Styles[Style.LineNumber].BackColor = Color.LightGray;        
         }
 
         public void OpenFile()
         {
-            OpenFileDialog fileDialog = new OpenFileDialog();
-            fileDialog.Title = "Select a File";
-            fileDialog.Filter = "All Supported Files (*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp)|*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp|C++ Source Files (*.cpp;*.cxx:*.c++;*.cc;*.cp)|*.cpp;*.cxx;*.cc;*.cp|C Source Files (*.c)|*.c|C/C++ Headers (*.h)|*.h";
+            OpenFileDialog fileDialog = new OpenFileDialog
+            {
+                Title = "Select a File",
+                Filter = "All Supported Files (*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp)|*.cpp;*.cxx;*.c++;*.c;*.h;*.cc;*.cp|C++ Source Files (*.cpp;*.cxx:*.c++;*.cc;*.cp)|*.cpp;*.cxx;*.cc;*.cp|C Source Files (*.c)|*.c|C/C++ Headers (*.h)|*.h"
+            };
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 file = fileDialog.FileName;
@@ -122,10 +124,12 @@ namespace C___Studio
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog fileDialog = new SaveFileDialog();
-            fileDialog.Title = "Save File";
-            fileDialog.FileName = file;
-            fileDialog.Filter = "C++ Source Files (*.cpp;*.cxx:*.c++;*.cc;*.cp)|*.cpp;*.cxx;*.cc;*.cp|C Source Files (*.c)|*.c|C/C++ Headers (*.h)|*.h";
+            SaveFileDialog fileDialog = new SaveFileDialog
+            {
+                Title = "Save File",
+                FileName = file,
+                Filter = "C++ Source Files (*.cpp;*.cxx:*.c++;*.cc;*.cp)|*.cpp;*.cxx;*.cc;*.cp|C Source Files (*.c)|*.c|C/C++ Headers (*.h)|*.h"
+            };
             if (fileDialog.ShowDialog() == DialogResult.OK)
             {
                 file = fileDialog.FileName;
