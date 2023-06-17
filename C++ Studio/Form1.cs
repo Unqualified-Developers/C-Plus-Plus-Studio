@@ -25,9 +25,9 @@ namespace C___Studio
             textBox1.Styles[Style.Default].Font = "Consolas";
             textBox1.Styles[Style.Default].Size = 16;
             textBox1.Styles[Style.Cpp.Word].ForeColor = Color.Blue;
-            textBox1.Styles[Style.Cpp.Word2].ForeColor = Color.Brown;
-            textBox1.SetKeywords(0, "auto break case catch char class const continue default delete do double else enum explicit extern false float for friend goto if inline int long mutable namespace new NULL operator private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this throw true try typedef typeid typename union unsigned using virtual void volatile while");
-            textBox1.SetKeywords(1, "main WinMain");
+            textBox1.Styles[Style.Cpp.Word2].ForeColor = Color.Purple;
+            textBox1.SetKeywords(0, "auto break case catch char class const continue default delete do double else enum explicit extern false float for friend goto if inline int long mutable namespace new operator private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this throw true try typedef typeid typename union unsigned using virtual void volatile while");
+            textBox1.SetKeywords(1, "main WinMain NULL");
             textBox1.Margins[0].Width = 50;
             textBox1.Margins[0].Type = MarginType.Number;
             textBox1.Styles[Style.LineNumber].Font = "Consolas";
