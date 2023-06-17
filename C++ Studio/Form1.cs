@@ -33,7 +33,44 @@ namespace C___Studio
             textBox1.Styles[Style.LineNumber].Font = "Consolas";
             textBox1.Styles[Style.LineNumber].Size = 12;
             textBox1.Styles[Style.LineNumber].ForeColor = Color.Black;
-            textBox1.Styles[Style.LineNumber].BackColor = Color.LightGray;        
+            textBox1.Styles[Style.LineNumber].BackColor = Color.LightGray;
+            textBox1.Margins[2].Type = MarginType.Symbol;
+            textBox1.Margins[2].Mask = Marker.MaskFolders;
+            textBox1.Margins[2].Sensitive = true;
+            textBox1.Margins[2].Width = 20;
+            textBox1.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
+            textBox1.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
+            textBox1.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
+            textBox1.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
+            textBox1.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
+            textBox1.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
+            textBox1.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+            textBox1.Markers[Marker.FolderEnd].SetBackColor(System.Drawing.Color.LightGray);
+            textBox1.Markers[Marker.FolderMidTail].SetBackColor(System.Drawing.Color.LightGray);
+            textBox1.Margins[2].Type = MarginType.Symbol;
+            textBox1.Margins[2].Mask = Marker.MaskFolders;
+            textBox1.Margins[2].Sensitive = true;
+            textBox1.Margins[2].Width = 20;
+            textBox1.Markers[Marker.Folder].Symbol = MarkerSymbol.BoxPlus;
+            textBox1.Markers[Marker.FolderOpen].Symbol = MarkerSymbol.BoxMinus;
+            textBox1.Markers[Marker.FolderEnd].Symbol = MarkerSymbol.BoxPlusConnected;
+            textBox1.Markers[Marker.FolderMidTail].Symbol = MarkerSymbol.TCorner;
+            textBox1.Markers[Marker.FolderOpenMid].Symbol = MarkerSymbol.BoxMinusConnected;
+            textBox1.Markers[Marker.FolderSub].Symbol = MarkerSymbol.VLine;
+            textBox1.Markers[Marker.FolderTail].Symbol = MarkerSymbol.LCorner;
+            textBox1.Markers[Marker.Folder].SetBackColor(SystemColors.ControlLightLight);
+            textBox1.Markers[Marker.FolderOpen].SetBackColor(SystemColors.ControlLightLight);
+            textBox1.Markers[Marker.FolderEnd].SetBackColor(SystemColors.ControlLightLight);
+            textBox1.Markers[Marker.FolderMidTail].SetBackColor(SystemColors.ControlLightLight);
+            textBox1.Markers[Marker.FolderOpenMid].SetBackColor(SystemColors.ControlLightLight);
+            textBox1.Markers[Marker.FolderSub].SetBackColor(SystemColors.ControlLightLight);
+            textBox1.Markers[Marker.FolderTail].SetBackColor(SystemColors.ControlLightLight);
+            textBox1.Lexer = Lexer.Cpp;
+            textBox1.SetProperty("fold", "1");
+            textBox1.SetProperty("fold.compact", "1");
+            textBox1.SetProperty("fold.comment", "1");
+            textBox1.SetProperty("fold.preprocessor", "1");
+            textBox1.AutomaticFold = AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change;
         }
 
         public void OpenFile()
