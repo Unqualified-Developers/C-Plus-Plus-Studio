@@ -12,6 +12,7 @@ namespace C___Studio
         private string file;
         private bool needToSave = false;
         private bool openedAFile = false;
+        private bool needToSaveBC = false;
         public Form1()
         {
             InitializeComponent();
@@ -91,7 +92,7 @@ namespace C___Studio
                 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave)
+            if (needToSave && textBox1.Text.Length != 0)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before quit?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -142,11 +143,13 @@ namespace C___Studio
             sw.Close();
             sw.Dispose();
             needToSave = false;
+            needToSaveBC = false;
         }
 
         private void OnTextChanged(object sender, EventArgs e)
         {
             needToSave = true;
+            needToSaveBC = true;
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,6 +178,7 @@ namespace C___Studio
                         saveToolStripMenuItem.Enabled = true;
                         textBox1.Text = sr.ReadToEnd();
                         needToSave = false;
+                        needToSaveBC = false;
                         openedAFile = true;
                     }
                 }
@@ -269,7 +273,7 @@ namespace C___Studio
 
         private void optimizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave)
+            if (needToSaveBC)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before compile?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -300,6 +304,8 @@ namespace C___Studio
             textBox1.Text = "int main() {\n    \n    return 0;\n}";
             openedAFile = false;
             file = null;
+            needToSave = false;
+            needToSaveBC = true;
             Text = "C++ Studio";
         }
 
@@ -308,6 +314,8 @@ namespace C___Studio
             textBox1.Text = "#include <iostream>\nusing namespace std;\n\n// Main function.\nint main() {\n    cout << \"Hello World!\" << endl;\n    return 0;\n}";
             openedAFile = false;
             file = null;
+            needToSave = false;
+            needToSaveBC = true;
             Text = "C++ Studio";
         }
         
@@ -316,13 +324,15 @@ namespace C___Studio
             textBox1.Text = "#include <windows.h>\n\n// This is where all the input to the window goes to.\nLRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) {\n switch(Message) {\n        \n        // Upon destruction, tell the main thread to stop.\n        case WM_DESTROY: {\n            PostQuitMessage(0);\n            break;\n        }\n        \n        // All other messages (a lot of them) are processed using default procedures.\n        default:\n            return DefWindowProc(hwnd, Message, wParam, lParam);\n    }\r\n    return 0;\n}\n\n// The 'main' function of Win32 GUI programs: this is where execution starts.\nint WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {\n    WNDCLASSEX wc; // A properties struct of our window.\n    HWND hwnd; // A 'HANDLE', hence the H, or a pointer to our window.\r\n    MSG msg; // A temporary location for all messages.\n\n    // Zero out the struct and set the stuff we want to modify.\n    memset(&wc,0,sizeof(wc));\n    wc.cbSize = sizeof(WNDCLASSEX);\n    wc.lpfnWndProc = WndProc; // This is where we will send messages to.\n    wc.hInstance = hInstance;\n    wc.hCursor = LoadCursor(NULL, IDC_ARROW);\n    \n    // White, COLOR_WINDOW is just a #define for a system color.\n    wc.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);\n    wc.lpszClassName = \"WindowClass\";\n    wc.hIcon = LoadIcon(NULL, IDI_APPLICATION); // Load a standard icon.\n    wc.hIconSm = LoadIcon(NULL, IDI_APPLICATION); // use the name \"A\" to use the project icon.\n\n    if(!RegisterClassEx(&wc)) {\n        MessageBox(NULL, \"Window Registration Failed!\",\"Error!\",MB_ICONEXCLAMATION|MB_OK);\n        return 0;\n    }\n\n    hwnd = CreateWindowEx(WS_EX_CLIENTEDGE,\"WindowClass\",\"Caption\",WS_VISIBLE|WS_OVERLAPPEDWINDOW,\n        CW_USEDEFAULT, // x\n        CW_USEDEFAULT, // y\n        640, // width\n        480, // height\n        NULL,NULL,hInstance,NULL);\n\n    if(hwnd == NULL) {\n        MessageBox(NULL, \"Window Creation Failed!\",\"Error!\",MB_ICONEXCLAMATION|MB_OK);\n        return 0;\n    }\n\n    /*\n        This is the heart of our program where all input is processed and sent to WndProc.\n        Note that GetMessage blocks code flow until it receives something, so this loop will not produce unreasonably high CPU usage.        \n    */\n    while(GetMessage(&msg, NULL, 0, 0) > 0) { // If no error is received...\n        TranslateMessage(&msg); // Translate key codes to chars if present.\n        DispatchMessage(&msg); // Send it to WndProc.\n    }\n    return msg.wParam;\n}";
             openedAFile = false;
             file = null;
+            needToSave = false;
+            needToSaveBC = true;
             Text = "C++ Studio";
         }
 
 
         private void emptyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave)
+            if (needToSave && textBox1.Text.Length != 0)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before creating a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -345,7 +355,7 @@ namespace C___Studio
 
         private void commandProgramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave)
+            if (needToSave && textBox1.Text.Length != 0)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before creating a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -373,7 +383,7 @@ namespace C___Studio
 
         private void windowsFormProgramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave)
+            if (needToSave && textBox1.Text.Length != 0)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before creating a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -420,7 +430,7 @@ namespace C___Studio
 
         private void debugToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave)
+            if (needToSaveBC)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before compile?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)

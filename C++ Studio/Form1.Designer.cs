@@ -25,7 +25,7 @@ namespace C___Studio
         /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         protected override void Dispose(bool disposing)
         {
-            if (needToSave)
+            if (needToSave && textBox1.Text.Length != 0)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before quit?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
