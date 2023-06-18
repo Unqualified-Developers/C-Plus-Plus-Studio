@@ -13,6 +13,7 @@ namespace C___Studio
         private bool needToSave = false;
         private bool openedAFile = false;
         private bool needToSaveBC = false;
+        private string fileContent;
         public Form1()
         {
             InitializeComponent();
@@ -79,8 +80,10 @@ namespace C___Studio
                     {
                         saveToolStripMenuItem.Enabled = true;
                         textBox1.Text = sr.ReadToEnd();
+                        fileContent = textBox1.Text;
                         openedAFile = true;
                         needToSave = false;
+                        needToSaveBC = false;
                     }
                 }
                 catch (Exception ex)
@@ -92,7 +95,7 @@ namespace C___Studio
                 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave && textBox1.Text.Length != 0)
+            if (needToSave && textBox1.Text.Length != 0 && textBox1.Text != fileContent)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before quit?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -115,7 +118,7 @@ namespace C___Studio
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave)
+            if (needToSave && textBox1.Text.Length != 0 && textBox1.Text != fileContent)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before quit?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -142,6 +145,7 @@ namespace C___Studio
             sw.Write(textBox1.Text);
             sw.Close();
             sw.Dispose();
+            fileContent = textBox1.Text;
             needToSave = false;
             needToSaveBC = false;
         }
@@ -177,6 +181,7 @@ namespace C___Studio
                     {
                         saveToolStripMenuItem.Enabled = true;
                         textBox1.Text = sr.ReadToEnd();
+                        fileContent = textBox1.Text;
                         needToSave = false;
                         needToSaveBC = false;
                         openedAFile = true;
@@ -273,7 +278,7 @@ namespace C___Studio
 
         private void optimizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSaveBC)
+            if (needToSaveBC && textBox1.Text != fileContent)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before compile?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -332,7 +337,7 @@ namespace C___Studio
 
         private void emptyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave && textBox1.Text.Length != 0)
+            if (needToSave && textBox1.Text.Length != 0 && textBox1.Text != fileContent)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before creating a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -355,7 +360,7 @@ namespace C___Studio
 
         private void commandProgramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave && textBox1.Text.Length != 0)
+            if (needToSave && textBox1.Text.Length != 0 && textBox1.Text != fileContent)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before creating a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -383,7 +388,7 @@ namespace C___Studio
 
         private void windowsFormProgramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSave && textBox1.Text.Length != 0)
+            if (needToSave && textBox1.Text.Length != 0 && textBox1.Text != fileContent)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before creating a new file?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
@@ -430,7 +435,7 @@ namespace C___Studio
 
         private void debugToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (needToSaveBC)
+            if (needToSaveBC && textBox1.Text != fileContent)
             {
                 DialogResult r = MessageBox.Show("Do you want to save before compile?", "Save File", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                 if (r == DialogResult.Yes)
