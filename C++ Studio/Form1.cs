@@ -55,6 +55,8 @@ namespace C___Studio
             textBox1.Markers[Marker.FolderOpenMid].SetBackColor(Color.White);
             textBox1.Markers[Marker.FolderSub].SetBackColor(Color.Black);
             textBox1.Markers[Marker.FolderTail].SetBackColor(Color.Black);
+            textBox1.CaretLineBackColor = Color.LightGray;
+            textBox1.CaretLineVisible = true;
             textBox1.Lexer = Lexer.Cpp;
             textBox1.SetProperty("fold", "1");
             textBox1.SetProperty("fold.compact", "1");
@@ -154,6 +156,8 @@ namespace C___Studio
         {
             needToSave = true;
             needToSaveBC = true;
+            textBox1.CaretLineBackColor = Color.LightGray;
+            textBox1.CaretLineVisible = true;
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
