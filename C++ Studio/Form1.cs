@@ -156,8 +156,6 @@ namespace C___Studio
         {
             needToSave = true;
             needToSaveBC = true;
-            textBox1.CaretLineBackColor = Color.LightGray;
-            textBox1.CaretLineVisible = true;
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
