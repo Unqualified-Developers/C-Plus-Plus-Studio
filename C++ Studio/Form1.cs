@@ -55,7 +55,7 @@ namespace C___Studio
             textBox1.Markers[Marker.FolderOpenMid].SetBackColor(Color.White);
             textBox1.Markers[Marker.FolderSub].SetBackColor(Color.Black);
             textBox1.Markers[Marker.FolderTail].SetBackColor(Color.Black);
-            textBox1.CaretLineBackColor = Color.LightGray;
+            textBox1.CaretLineBackColor = Color.FromArgb(235, 235, 235);
             textBox1.CaretLineVisible = true;
             textBox1.Lexer = Lexer.Cpp;
             textBox1.SetProperty("fold", "1");
@@ -263,6 +263,8 @@ namespace C___Studio
         {
             Process process = new Process();
             process.StartInfo.FileName = ".\\MinGW\\bin\\g++.exe";
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.UseShellExecute = false;
             string filebc;
             try
             {
@@ -273,7 +275,10 @@ namespace C___Studio
                     process.StartInfo.FileName = ".\\MinGW\\bin\\gcc.exe";
                 }
                 else filebc = file.Substring(0, file.Length - 3);
-                process.StartInfo.Arguments = $"{file} -o {filebc}.exe"; process.Start(); 
+                process.StartInfo.Arguments = $"{file} -o {filebc}.exe";
+                process.Start();
+                process.WaitForExit();
+                if (process.ExitCode != 0) MessageBox.Show(process.StandardError.ReadToEnd().ToString(), "Compile Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -415,6 +420,8 @@ namespace C___Studio
         {
             Process process = new Process();
             process.StartInfo.FileName = ".\\MinGW\\bin\\g++.exe";
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.UseShellExecute = false;
             string filebc;
             try
             {
@@ -427,10 +434,14 @@ namespace C___Studio
                 else filebc = file.Substring(0, file.Length - 3);
                 process.StartInfo.Arguments = $"-g {file} -o {filebc}.exe";
                 process.Start();
-                process.WaitForExit();                
-                process.StartInfo.FileName = ".\\MinGW\\bin\\gdb.exe";
-                process.StartInfo.Arguments = $"{filebc}.exe";
-                process.Start();                
+                process.WaitForExit();
+                if (process.ExitCode != 0) MessageBox.Show(process.StandardError.ReadToEnd().ToString(), "Compile Failed", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                else
+                {
+                    process.StartInfo.FileName = ".\\MinGW\\bin\\gdb.exe";
+                    process.StartInfo.Arguments = $"{filebc}.exe";
+                    process.Start();
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
