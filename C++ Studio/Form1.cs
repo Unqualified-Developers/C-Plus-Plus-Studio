@@ -17,9 +17,6 @@ namespace C___Studio
         public Form1()
         {
             InitializeComponent();
-            menuStrip1.Width = Width;
-            textBox1.Width = Width - 15;
-            textBox1.Height = Height - 61;
             textBox1.Styles[Style.Cpp.Preprocessor].ForeColor = Color.DarkOrange;
             textBox1.Styles[Style.Cpp.Number].ForeColor = Color.DeepSkyBlue;
             textBox1.Styles[Style.Cpp.Comment].ForeColor = Color.MediumSeaGreen;
@@ -200,7 +197,11 @@ namespace C___Studio
         {
             menuStrip1.Width = Width;
             textBox1.Width = Width - 15;
-            textBox1.Height = Height - 61;
+            compileOutputBox.Width = Width - 15;
+            compileOutputBox.Location = new Point(0, Height - 185);
+            if (!compileOutputBox.Visible) textBox1.Height = Height - 86;
+            else textBox1.Height = Height - 206;
+            outputEButton.Location = new Point(0, Height - 65);
         }
 
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -278,7 +279,13 @@ namespace C___Studio
                 process.StartInfo.Arguments = $"{file} -o {filebc}.exe";
                 process.Start();
                 process.WaitForExit();
-                if (process.ExitCode != 0) MessageBox.Show(process.StandardError.ReadToEnd().ToString(), "Compile Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (process.ExitCode != 0)
+                {
+                    compileOutputBox.Clear();
+                    compileOutputBox.Lines = process.StandardError.ReadToEnd().Split('\n');
+                    compileOutputBox.Visible = true;
+                    FormResize(new object(), new EventArgs());
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -308,7 +315,7 @@ namespace C___Studio
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Version 1.0.0.0 Alpha 3\nCopyright ©  2023  (Python Object Developers)\nCompiler: MinGW-W64\nWelcome to contribute code!", "About C++ Studio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Version 1.0.0.0 Alpha 4\nCopyright ©  2023  (Python Object Developers)\nCompiler: MinGW-W64\nWelcome to contribute code!", "About C++ Studio", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void NewEmpty()
@@ -435,7 +442,13 @@ namespace C___Studio
                 process.StartInfo.Arguments = $"-g {file} -o {filebc}.exe";
                 process.Start();
                 process.WaitForExit();
-                if (process.ExitCode != 0) MessageBox.Show(process.StandardError.ReadToEnd().ToString(), "Compile Failed", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                if (process.ExitCode != 0)
+                {
+                    compileOutputBox.Clear();
+                    compileOutputBox.Lines = process.StandardError.ReadToEnd().Split('\n');
+                    compileOutputBox.Visible = true;
+                    FormResize(new object(), new EventArgs());
+                }
                 else
                 {
                     process.StartInfo.FileName = ".\\MinGW\\bin\\gdb.exe";
@@ -481,6 +494,13 @@ namespace C___Studio
             Cursor = Cursors.WaitCursor;
             textBox1.Redo();
             Cursor = Cursors.Default;
+        }
+
+        private void outputEButton_Click(object sender, EventArgs e)
+        {
+            if (compileOutputBox.Visible) compileOutputBox.Visible = false;
+            else compileOutputBox.Visible = true;
+            FormResize(sender, e);
         }
     }
 }
