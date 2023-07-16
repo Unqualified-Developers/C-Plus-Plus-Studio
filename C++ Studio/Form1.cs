@@ -65,20 +65,17 @@ namespace C___Studio
 
         List<string> autoCompleteData = new List<string>
         {
-            "asm", "auto", "break" ,"case" ,"catch" ,"char" ,"class" ,"const", "continue" ,"default" ,"delete", "do", "double" ,"dynamic_cast", "else", "enum", "explicit", "export", "extern" ,"float", "for", "friend" ,"goto", "if" ,"inline" ,"int" ,"long" ,"mutable" ,"namespace","new","operator" ,"private" ,"protected" ,"public" ,"register" ,"reinterpret_cast" ,"return" ,"short"
-            , "signed" ,"sizeof" ,"static" ,"static_cast" ,"struct", "switch","template" ,"throw" ,"try" ,"typedef" ,"typeid","typename", "union" ,"unsigned" ,"using", "virtual", "void" ,"volatile" ,"wchar_t" ,"while"
+            "asm", "auto", "break" ,"case" ,"catch" ,"char" ,"class" ,"const", "continue" ,"default" ,"delete", "do", "double" ,"dynamic_cast", "else", "enum", "explicit", "export", "extern" ,"float", "for", "friend" ,"goto", "if" ,"inline" ,"int" ,"long" ,"mutable" ,"namespace","new","operator" ,"private" ,"protected" ,"public" ,"register" ,"reinterpret_cast" ,"return" ,"short" ,
+            "signed" ,"sizeof" ,"static" ,"static_cast" ,"struct", "switch","template" ,"throw" ,"try" ,"typedef" ,"typeid","typename", "union" ,"unsigned" ,"using", "virtual", "void" ,"volatile" ,"wchar_t" ,"while" ,
+            "#define", "#include", "#undef", "#ifdef", "#ifndef", "#if", "#else", "#elif", "#endif"
         };
 
         private void ShowAutoComplete()
         {
-            // 获取当前光标位置之前的单词
             int currentPos = textBox1.CurrentPosition;
             int wordStartPos = textBox1.WordStartPosition(currentPos, true);
             string currentWord = textBox1.GetTextRange(wordStartPos, currentPos - wordStartPos);
-
-            // 创建自动提示列表的字符串
             string autoCompleteList = string.Join(" ", autoCompleteData);
-            // 显示自动提示列表
             textBox1.AutoCShow(currentWord.Length, autoCompleteList);
         }
 
