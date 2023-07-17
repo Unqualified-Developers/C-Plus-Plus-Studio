@@ -4,7 +4,6 @@ using System.IO;
 using System.Windows.Forms;
 using ScintillaNET;
 using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace C___Studio
 {
@@ -15,9 +14,13 @@ namespace C___Studio
         private bool openedAFile = false;
         private bool needToSaveBC = false;
         private string fileContent;
+        readonly string autoCompleteData = "asm auto break case catch char class const continue default define delete do double dynamic_cast elif else endif enum explicit export extern false float for friend goto if ifdef ifndef include inline int long main() mutable namespace new operator private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this throw true try typedef typeid typename undef union unsigned using virtual void volatile wchar_t while";
+
         public Form1()
         {
             InitializeComponent();
+            textBox1.AutoCMaxHeight = 7;
+            textBox1.AutoCCompleted += new EventHandler<AutoCSelectionEventArgs>(HideAutoComplete);
             textBox1.Styles[Style.Cpp.Preprocessor].ForeColor = Color.DarkOrange;
             textBox1.Styles[Style.Cpp.Number].ForeColor = Color.DeepSkyBlue;
             textBox1.Styles[Style.Cpp.Comment].ForeColor = Color.MediumSeaGreen;
@@ -63,24 +66,17 @@ namespace C___Studio
             textBox1.AutomaticFold = AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change;       
         }
 
-        List<string> autoCompleteData = new List<string>
+        private void HideAutoComplete(object sender, EventArgs e)
         {
-            "asm", "auto", "break", "case", "catch", "char", "class", "const", "continue", "default", "delete", "do",
-            "double", "dynamic_cast", "else", "enum", "explicit", "export", "extern", "float", "for", "friend",
-            "goto", "if", "inline", "int", "long", "mutable", "namespace", "new", "operator", "private", "protected",
-            "public", "register", "reinterpret_cast", "return", "short", "signed", "sizeof", "static", "static_cast",
-            "struct", "switch", "template", "throw", "try", "typedef", "typeid", "typename", "union", "unsigned",
-            "using", "virtual", "void", "volatile", "wchar_t", "while", "#define", "#include", "#undef", "#ifdef",
-            "#ifndef", "#if", "#else", "#elif", "#endif"
-        };
+            textBox1.AutoCCancel();
+        }
 
         private void ShowAutoComplete()
         {
             int currentPos = textBox1.CurrentPosition;
             int wordStartPos = textBox1.WordStartPosition(currentPos, true);
             string currentWord = textBox1.GetTextRange(wordStartPos, currentPos - wordStartPos);
-            string autoCompleteList = string.Join(" ", autoCompleteData);
-            textBox1.AutoCShow(currentWord.Length, autoCompleteList);
+            textBox1.AutoCShow(currentWord.Length, autoCompleteData);
         }
 
         public void OpenFile()
