@@ -344,6 +344,7 @@ namespace C___Studio
             needToSave = false;
             needToSaveBC = true;
             Text = "C++ Studio";
+            textBox1.AutoCCancel();
         }
 
         public void NewCmdProgram()
@@ -354,6 +355,7 @@ namespace C___Studio
             needToSave = false;
             needToSaveBC = true;
             Text = "C++ Studio";
+            textBox1.AutoCCancel();
         }
         
         public void NewWFProgram()
@@ -364,6 +366,7 @@ namespace C___Studio
             needToSave = false;
             needToSaveBC = true;
             Text = "C++ Studio";
+            textBox1.AutoCCancel();
         }
 
 
