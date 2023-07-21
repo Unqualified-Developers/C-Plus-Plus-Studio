@@ -170,7 +170,14 @@ namespace C___Studio
         {
             needToSave = true;
             needToSaveBC = true;
-            ShowAutoComplete();
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (Char.IsLetter((char)e.KeyCode))
+            {
+                ShowAutoComplete();
+            }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
