@@ -15,7 +15,7 @@ namespace C___Studio
         private bool needToSaveBC = false;
         private string fileContent;
         readonly string autoCompleteDataKey = "asm auto break case catch char class const continue default delete do double dynamic_cast else enum explicit export extern false float for friend goto if inline int long main() mutable namespace new operator private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this throw true try typedef typeid typename union unsigned using virtual void volatile wchar_t while";
-        readonly string autoCompleteDataPre = "define elif else endif if ifdef ifndef include undef"
+        readonly string autoCompleteDataPre = "define elif else endif if ifdef ifndef include undef";
 
         public Form1()
         {
