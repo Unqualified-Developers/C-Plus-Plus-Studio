@@ -14,7 +14,8 @@ namespace C___Studio
         private bool openedAFile = false;
         private bool needToSaveBC = false;
         private string fileContent;
-        readonly string autoCompleteData = "asm auto break case catch char class const continue default define delete do double dynamic_cast elif else endif enum explicit export extern false float for friend goto if ifdef ifndef include inline int long main() mutable namespace new operator private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this throw true try typedef typeid typename undef union unsigned using virtual void volatile wchar_t while";
+        readonly string autoCompleteDataKey = "asm auto break case catch char class const continue default delete do double dynamic_cast else enum explicit export extern false float for friend goto if inline int long main() mutable namespace new operator private protected public register reinterpret_cast return short signed sizeof static static_cast struct switch template this throw true try typedef typeid typename union unsigned using virtual void volatile wchar_t while";
+        readonly string autoCompleteDataPre = "define elif else endif if ifdef ifndef include undef"
 
         public Form1()
         {
@@ -75,8 +76,10 @@ namespace C___Studio
         {
             int currentPos = textBox1.CurrentPosition;
             int wordStartPos = textBox1.WordStartPosition(currentPos, true);
+            string currentLine = textBox1.Lines[textBox1.GetLineFromCharIndex(textBox1.SelectionStart)];
             string currentWord = textBox1.GetTextRange(wordStartPos, currentPos - wordStartPos);
-            textBox1.AutoCShow(currentWord.Length, autoCompleteData);
+            if (currentLine.StartsWith("#")) textBox1.AutoCShow(currentWord.Length, autoCompleteDataPre);
+            else textBox1.AutoCShow(currentWord.Length, autoCompleteDataKey);
         }
 
         public void OpenFile()
