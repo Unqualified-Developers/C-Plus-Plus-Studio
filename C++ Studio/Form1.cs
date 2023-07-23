@@ -76,7 +76,7 @@ namespace C___Studio
         {
             int currentPos = textBox1.CurrentPosition;
             int wordStartPos = textBox1.WordStartPosition(currentPos, true);
-            string currentLine = textBox1.Lines[textBox1.GetLineFromCharIndex(textBox1.SelectionStart)];
+            string currentLine = textBox1.Lines[textBox1.CurrentLine].Text;
             string currentWord = textBox1.GetTextRange(wordStartPos, currentPos - wordStartPos);
             if (currentLine.StartsWith("#")) textBox1.AutoCShow(currentWord.Length, autoCompleteDataPre);
             else textBox1.AutoCShow(currentWord.Length, autoCompleteDataKey);
