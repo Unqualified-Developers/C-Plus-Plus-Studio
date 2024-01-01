@@ -343,7 +343,7 @@ namespace C___Studio
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Version 1.0.0.0 Alpha 4\nCopyright ©  2023  (Python Object Developers)\nCompiler: MinGW-W64\nWelcome to contribute code!", "About C++ Studio", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Version 1.0.0.0 Alpha 4\nCopyright ©  2023-2024  (Python Object Developers)\nCompiler: MinGW-W64\nWelcome to contribute code!", "About C++ Studio", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         public void NewEmpty()
